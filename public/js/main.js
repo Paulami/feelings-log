@@ -141,7 +141,7 @@ class Records {
   async createRecord() {
     var date = new Date();
     date.setDate(date.getDate() + this.recordNum);
-    this.recordNum = this.recordNum + 1;
+    // this.recordNum = this.recordNum + 1; // comment this line in production, if not commented
     const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const dateTimeFormat = new Intl.DateTimeFormat('en-GB', dateOptions);
     try {
