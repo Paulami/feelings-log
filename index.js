@@ -68,3 +68,12 @@ app.post("/api/v1/records", async (req, res) => {
     res.json(error);
   }
 });
+
+app.delete('/api/v1/records/:id', async (req, res) => {
+  try {
+  const deletedDocument = await records.findOneAndDelete(req.params.id);
+  res.json({"message":"successfully removed item", "data": JSON.stringify(deletedDocument) });
+  } catch (error) {
+    res.json({ error: JSON.stringify(error) });
+  }
+});

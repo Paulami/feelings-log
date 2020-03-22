@@ -41,6 +41,24 @@ class Records {
   }
 
   /**
+   * deleteTodo
+   * DELETE
+   * @param {*} id 
+   */
+  async delete(id) {
+    try {
+      const options = {
+        method: 'DELETE'
+      };
+      let data = await fetch(this.baseurl + `/${id}`, options);
+      data = await data.json();
+      this.updateRecords();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  /**
    * DOM rendering of the todos
    */
   renderTodos() {
@@ -73,6 +91,7 @@ class Records {
       const $listItem = evt.currentTarget;
 
       if ($clickedButton.classList.contains('item__delete')) {
+        await this.delete($listItem.id);
         console.log('delete', $listItem, $listItem.id);
       } else if ($clickedButton.classList.contains('item__edit')) {
         const form = $listItem.firstElementChild;
