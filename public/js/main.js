@@ -48,11 +48,44 @@ class Records {
     this.records.forEach(item => {
       this.$records.innerHTML += `
         <li class="record-item" id="${item._id}">
+          <form class="item__form">
+            <input type="text" name="record" value="${item.userFeelings}">
+          </form>
           <p>${item.date} ${item.userFeelings} ${item.status}</p>
+          <button class="item__delete">delete</button> | <button class="item__edit">edit</button>
         </li>
       `;
     });
+
+    // add listener to update or delete
+    document.querySelectorAll('.record-item').forEach(item => {
+      item.addEventListener('click', this.handleEditOrDelete.bind(this));
+    });
   }
+
+  /**
+   * handle the edit or delete button
+   * @param {} evt 
+   */
+  async handleEditOrDelete(evt) {
+    {
+      const $clickedButton = evt.target;
+      const $listItem = evt.currentTarget;
+
+      if ($clickedButton.classList.contains('item__delete')) {
+        console.log('delete', $listItem, $listItem.id);
+      } else if ($clickedButton.classList.contains('item__edit')) {
+        const form = $listItem.firstElementChild;
+
+        const updatedData = {
+          todo: form.record.value,
+          status: form.status.value
+        };
+        console.log(updatedData);
+      }
+    }
+  }
+
 
 
   /**
