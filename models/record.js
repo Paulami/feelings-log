@@ -15,7 +15,7 @@ const schema = new Schema({
     index: true,
   },
   status: { // info about covid-19 deaths/infected
-    type: Integer,
+    type: Number,
     required: true
   }
   
