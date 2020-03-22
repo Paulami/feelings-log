@@ -42,7 +42,7 @@ app.get("/", (req, res) => {
 
 // ---- ADD YOUR API ENDPOINTS HERE ----
 
-// GET: "/api/v1/records"
+// GET: "/api/v1/records" read all records
 app.get("/api/v1/records", async (req, res) => {
   try{
     const data = await records.find();
@@ -53,7 +53,7 @@ app.get("/api/v1/records", async (req, res) => {
   }
 });
 
-// POST: "/api/v1/records"
+// POST: "/api/v1/records" create records
 app.post("/api/v1/records", async (req, res) => {
   try{
     const newData = {
@@ -61,15 +61,22 @@ app.post("/api/v1/records", async (req, res) => {
       date: req.body.date,
       status: req.body.status,
     }
-    const data = await records.create(newData); // TODO if record already exist
-    res.json(data);
+    const oldData = await records.findOne({ date: newData.date});
+    if (oldData != null) {
+      // in case record exist, replace/update it
+      const data = await records.findOneAndUpdate({_id: oldData.id}, newData, {new:true});
+      res.json(data);
+    } else {
+      const data = await records.create(newData);
+      res.json(data);
+    }
   } catch(error){
     console.error(error);
     res.json(error);
   }
 });
 
-// PUT: "api/v1/records:id"
+// PUT: "api/v1/records:id" update a record
 app.put("/api/v1/records/:id", async (req, res) => {
   try{
     console.log(req.params.id, req.body);
@@ -86,7 +93,7 @@ app.put("/api/v1/records/:id", async (req, res) => {
   }
 });
 
-// DELETE: "/api/v1/records/:id"
+// DELETE: "/api/v1/records/:id" delete a record
 app.delete('/api/v1/records/:id', async (req, res) => {
   try {
   const deletedDocument = await records.findOneAndDelete(req.params.id);
