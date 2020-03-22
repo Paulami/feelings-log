@@ -1,5 +1,6 @@
 class Records {
   constructor() {
+    this.convidurl = 'https://covid19.mathdro.id/api/countries/USA';
     this.baseurl = '/api/v1/records';
     this.records = [];
     this.$form = document.querySelector('.record-form');
@@ -117,14 +118,12 @@ class Records {
 
       if ($clickedButton.classList.contains('item__delete')) {
         await this.deleteRecord($listItem.id);
-        console.log('delete', $listItem, $listItem.id);
       } else if ($clickedButton.classList.contains('item__edit')) {
         const updatedData = {
           newUserInput: $listItem.children[0].record.value,
           date: $listItem.children[1].getAttribute("value"),
           status: $listItem.children[2].getAttribute("value"),
         };
-        console.log(updatedData);
         await this.updateRecord($listItem.id, updatedData);
         console.log('edit', $listItem.id);
       }
@@ -143,10 +142,12 @@ class Records {
     const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const dateTimeFormat = new Intl.DateTimeFormat('en-GB', dateOptions);
     try {
-      // TODO if empty throw error or warning to UI. Or update existing record
+      let covidResStream = await fetch(this.convidurl);
+      let covidResObj = await covidResStream.json();
+      let totalInfected = covidResObj.confirmed.value;
       const newData = {
         newUserInput: this.$form.userInput.value,
-        status: 192,
+        status: totalInfected,
         date: dateTimeFormat.format(date),
       };
       const options = {
@@ -159,7 +160,7 @@ class Records {
       };
       let data = await fetch(this.baseurl, options);
       data = await data.json();
-      console.log(data);
+      await this.updateRecords();
     } catch (error) {
       console.error(error);
     }
