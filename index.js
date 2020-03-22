@@ -41,6 +41,18 @@ app.get("/", (req, res) => {
 });
 
 // ---- ADD YOUR API ENDPOINTS HERE ----
+
+// GET: "/api/v1/records"
+app.get("/api/v1/records", async (req, res) => {
+  try{
+    const data = await records.find();
+    res.json(data);
+  } catch(error){
+    console.error(error);
+    res.json(error);
+  }
+});
+
 // POST: "/api/v1/records"
 app.post("/api/v1/records", async (req, res) => {
   try{
@@ -49,7 +61,7 @@ app.post("/api/v1/records", async (req, res) => {
       date: req.body.date,
       status: req.body.status,
     }
-    const data = await records.create(newData);
+    const data = await records.create(newData); // TODO if record already exist
     res.json(data);
   } catch(error){
     console.error(error);

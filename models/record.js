@@ -9,10 +9,9 @@ const schema = new Schema({
     required: true
   },
   date: { // primary key
-    type: String,
+    type: String, // Not using default Date; Only weekday/day/month/year are req.
     required: true,
     unique: true, // single record for each day
-    index: true,
   },
   status: { // info about covid-19 deaths/infected
     type: Number,
