@@ -69,6 +69,24 @@ app.post("/api/v1/records", async (req, res) => {
   }
 });
 
+// PUT: "api/v1/records:id"
+app.put("/api/v1/records/:id", async (req, res) => {
+  try{
+    console.log(req.params.id, req.body);
+    const updatedData = {
+      userFeelings: req.body.newUserInput,
+      date: req.body.date,
+      status: req.body.status,
+    }
+    const data = await records.findOneAndUpdate({_id: req.params.id}, updatedData, {new:true});
+    res.json(data);
+  } catch(error){
+    console.error(error);
+    res.json(error);
+  }
+});
+
+// DELETE: "/api/v1/records/:id"
 app.delete('/api/v1/records/:id', async (req, res) => {
   try {
   const deletedDocument = await records.findOneAndDelete(req.params.id);

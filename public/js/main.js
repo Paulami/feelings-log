@@ -15,7 +15,7 @@ class Records {
 
     this.$form.addEventListener('submit', async (evt) => {
       evt.preventDefault();
-      await this.create();
+      await this.createRecord();
     });
 
   }
@@ -40,12 +40,36 @@ class Records {
     await this.renderRecords();
   }
 
+    /**
+   * updateRecord
+   * PUT
+   * @param {*} id 
+   * @param {*} newData 
+   */
+  async updateRecord(id, newData) {
+    try {
+      const options = {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newData)
+      };
+      let data = await fetch(this.baseurl + `/${id}`, options);
+      data = await data.json();
+      await this.updateRecords();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   /**
    * deleteRecord
    * DELETE
    * @param {*} id 
    */
-  async delete(id) {
+  async deleteRecord(id) {
     try {
       const options = {
         method: 'DELETE'
@@ -69,7 +93,8 @@ class Records {
           <form class="item__form">
             <input type="text" name="record" value="${item.userFeelings}">
           </form>
-          <p>${item.date} ${item.userFeelings} ${item.status}</p>
+          <div value="${item.date}"><p>${item.date}</p></div>
+          <div value="${item.status}"><p>${item.status}</p></div>
           <button class="item__delete">delete</button> | <button class="item__edit">edit</button>
         </li>
       `;
@@ -91,21 +116,27 @@ class Records {
       const $listItem = evt.currentTarget;
 
       if ($clickedButton.classList.contains('item__delete')) {
-        await this.delete($listItem.id);
+        await this.deleteRecord($listItem.id);
         console.log('delete', $listItem, $listItem.id);
       } else if ($clickedButton.classList.contains('item__edit')) {
-        const form = $listItem.firstElementChild;
+        const updatedData = {
+          newUserInput: $listItem.children[0].record.value,
+          date: $listItem.children[1].getAttribute("value"),
+          status: $listItem.children[2].getAttribute("value"),
+        };
+        console.log(updatedData);
+        await this.updateRecord($listItem.id, updatedData);
+        console.log('edit', $listItem.id);
       }
     }
   }
-
 
 
   /**
    * Send new row info to the table using
    * POST request
    */
-  async create() {
+  async createRecord() {
     var date = new Date();
     date.setDate(date.getDate() + this.recordNum);
     this.recordNum = this.recordNum + 1;
