@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 // 2. Get the Schema class from mongoose
 const Schema = mongoose.Schema;
-// 3. Define the database model schema for your todos
+// 3. Define the database model schema for your records
 const schema = new Schema({
   userFeelings: { // holds user input / day
     type: String,
@@ -22,5 +22,5 @@ const schema = new Schema({
 
 // 4. create a new mongodb model called: "FeelingLog"
 const db = mongoose.model('FeelingLog', schema)
-// 5. make this todos model available to your app
+// 5. make this model available to your app
 module.exports = db;

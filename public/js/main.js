@@ -21,27 +21,27 @@ class Records {
   }
 
   /**
-   * updateTodos
+   * updateRecords
    * GET & rerender()
    */
   async updateRecords() {
-    await this.getTodos();
-    this.renderTodos();
+    await this.getRecords();
+    this.renderRecords();
   }
 
   /**
-   * getTodos
+   * getRecords
    * GET
    */
-  async getTodos() {
+  async getRecords() {
     let data = await fetch(this.baseurl);
     data = await data.json();
     this.records = data;
-    await this.renderTodos();
+    await this.renderRecords();
   }
 
   /**
-   * deleteTodo
+   * deleteRecord
    * DELETE
    * @param {*} id 
    */
@@ -59,9 +59,9 @@ class Records {
   }
 
   /**
-   * DOM rendering of the todos
+   * DOM rendering of the records
    */
-  renderTodos() {
+  renderRecords() {
     this.$records.innerHTML = '';
     this.records.forEach(item => {
       this.$records.innerHTML += `
@@ -95,12 +95,6 @@ class Records {
         console.log('delete', $listItem, $listItem.id);
       } else if ($clickedButton.classList.contains('item__edit')) {
         const form = $listItem.firstElementChild;
-
-        const updatedData = {
-          todo: form.record.value,
-          status: form.status.value
-        };
-        console.log(updatedData);
       }
     }
   }
