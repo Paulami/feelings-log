@@ -4,7 +4,7 @@ class Records {
     this.baseurl = '/api/v1/records';
     this.records = [];
     this.$form = document.querySelector('.record-form');
-    this.$records = document.querySelector('.log-list');
+    this.$records = document.querySelector('.container');
     this.recordNum = 0;
   }
 
@@ -90,14 +90,17 @@ class Records {
     this.$records.innerHTML = '';
     this.records.forEach(item => {
       this.$records.innerHTML += `
-        <li class="record-item" id="${item._id}">
+        <div class="record-item card" id="${item._id}">
+          <div value="${item.date}"><h4>${item.date}</h4></div>
+          <div class="totalCount" value="${item.status}"><p>Total Confirmed Cases: ${item.status}</p></div>
           <form class="item__form">
-            <input type="text" name="record" value="${item.userFeelings}">
+            <input type="text" name="record" style="width: 90%;" value="${item.userFeelings}">
           </form>
-          <div value="${item.date}"><p>${item.date}</p></div>
-          <div value="${item.status}"><p>${item.status}</p></div>
-          <button class="item__delete">delete</button> | <button class="item__edit">edit</button>
-        </li>
+          <div class="item__footer"> 
+            <button class="item__delete">delete</button> | <button class="item__edit">edit</button>
+          </div>
+          
+        </div>
       `;
     });
 
@@ -120,9 +123,9 @@ class Records {
         await this.deleteRecord($listItem.id);
       } else if ($clickedButton.classList.contains('item__edit')) {
         const updatedData = {
-          newUserInput: $listItem.children[0].record.value,
-          date: $listItem.children[1].getAttribute("value"),
-          status: $listItem.children[2].getAttribute("value"),
+          newUserInput: $listItem.children[2].record.value,
+          date: $listItem.children[0].getAttribute("value"),
+          status: $listItem.children[1].getAttribute("value"),
         };
         await this.updateRecord($listItem.id, updatedData);
         console.log('edit', $listItem.id);

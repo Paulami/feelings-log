@@ -5,26 +5,27 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Weather app</title>
-      <link rel="stylesheet" href="style.css" />
+      <title>Covid-19 Log</title>
+      <link rel="stylesheet" href="./styles/main.css" />
     </head>
 
     <body>
       <div class="app-wrap">
         <header class="header">
-          <h1 class="header__title">COVID-19 Logs</h1>
+          <h1 class="header__title" style="text-align: center;">COVID-19 Logs</h1>
         </header>
         <main class="main">
           <h2>Add a record</h2>
           <form class="record-form">
-            <input type="text" name="userInput" placeholder="Please describe how you are feeling today..." required/>
+            <input type="text" name="userInput" placeholder="Please describe how you are feeling today..." style="width: 500px;" required/>
             <input type="submit" value="Add"/>
           </form>
           <h2>Previous Days</h2>
-          <section class="log-list"></section>
+          <div class="container">
+          </div>
+          
       </div>
-      <script src="./js/main.js"></script> 
-      <!-- arc whats differnce bw adding script at bottom vs top -->
+      <script src="./js/main.js"></script>
     </body>
 
     </html>
