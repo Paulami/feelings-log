@@ -1,6 +1,6 @@
 # feelings-log
 
-About
+<b>About: </b>
 For this assignment, we were asked to connect the database we built in class to client side javascript that would enable us to update our database in the DOM.
 
 Setup
@@ -11,6 +11,9 @@ https://drive.google.com/open?id=13qR0wwWvqnCJp7rpfTVWeYFGBxK_NSZo
 
 Process overview: 
 https://drive.google.com/drive/folders/1bgzlc8PG6XDZ2XJH882X4ByL0rQS30Ri?usp=sharing
+
+API used:
+https://covid19.mathdro.id/api/
 
 Develop
 To develop this document, you can follow the steps provided below:
@@ -43,3 +46,6 @@ Credits:
 - Arghya Roychoudhury for staying up till late and helping me debug.
 - Atharva Patil for helping me stay sane.
 - Joey for feedback.
+
+Code of Conduct:
+https://www.contributor-covenant.org/version/1/4/code-of-conduct/
