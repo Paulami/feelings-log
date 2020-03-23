@@ -9,8 +9,8 @@ This project requires node.js, express, and mongoose.
 Video demo: 
 https://drive.google.com/open?id=13qR0wwWvqnCJp7rpfTVWeYFGBxK_NSZo
 
-Debug issues:
-
+Process overview: 
+https://drive.google.com/drive/folders/1bgzlc8PG6XDZ2XJH882X4ByL0rQS30Ri?usp=sharing
 
 Develop
 To develop this document, you can follow the steps provided below:
@@ -21,20 +21,14 @@ To develop this document, you can follow the steps provided below:
 5. Make a pull request specifying what additions and changes were made
 6. Celebrate the contribution!
 
-Deployment
-This project is hosted on Github. Github renders markdown files.
-
 Built with
-VS Code
-Github
-Glitch
-Authors
-Lillian Ritchie
-Code of Conduct
-Please read the CODE OF CONDUCT
+- VS Code
+- Github
+- Glitch
+- Authors: Paulami Roychoudhury
 
 License
-This is README template is licensed according to Attribution 4.0 International (CC BY 4.0)
+- This is README template is licensed according to Attribution 4.0 International (CC BY 4.0)
 
 This project is built on:
 - Structure: https://github.com/itp-dwd/2020-spring/blob/master/guides/project-development-checklist.md
