@@ -92,12 +92,12 @@ class Records {
       this.$records.innerHTML += `
         <div class="record-item card" id="${item._id}">
           <div value="${item.date}"><h4>${item.date}</h4></div>
-          <div class="totalCount" value="${item.status}"><p>Total Confirmed Cases: ${item.status}</p></div>
+          <div class="totalCount" value="${item.status}"><p>People infected so far: ${item.status}</p></div>
           <form class="item__form">
             <input type="text" name="record" style="width: 90%;" value="${item.userFeelings}">
           </form>
           <div class="item__footer"> 
-            <button class="item__delete">delete</button> | <button class="item__edit">edit</button>
+            <button class="item__delete">Delete</button>  <button class="item__edit">Edit</button>
           </div>
           
         </div>
